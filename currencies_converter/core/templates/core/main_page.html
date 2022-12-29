@@ -9,20 +9,43 @@
 </head>
 <body>
 
+<form action="" method="post">
+    {% csrf_token %}
+    <label for="Amount of money to convert">Amount of money to convert: </label>
+    <input type="number" id="Amount of money to convert" {%if quantity_of_money_to_convert %} value="{{quantity_of_money_to_convert}}"{% endif %}>
 
+    <label for="Currencie to convert from">Currencie to convert from: </label>
+    <select id="Currencie to convert from" type="text" name="Currencie to convert from" value="{{convert_from}}">
+        {% for row in csvreader %}
+        <option value="{{row}}" {% if convert_from == row %}selected{% endif %}>{{row}}</option>
+        {% endfor %}
+    </select>
 
-<div class="row">
-    <div class="col-md">
-        <div class="card card-body">
-            <form method="post">
-                {{form.quantity_of_money_to_convert}}
-                {{form.convert_from}}
-                {{form.convert_to}}
-                <button type="submit">Calculate</button>
-            </form>
-        </div>
-    </div>
-</div>
+    <label for="Currencie to convert to">Currencie to convert to: </label>
+    <select id="Currencie to convert to" type="text" name="Currencie to convert to" value="{{convert_to}}">
+        {% for row in csvreader %}
+        <option value="{{row}}" {% if convert_to == row %}selected{% endif %}>{{row}}</option>
+        {% endfor %}
+    </select>
+
+    <input type="submit" value="OK">
+    {% if converted_sum %}
+    Result is {{converted_sum}}
+    {% endif %}
+</form>
+
+<!--<div class="row">-->
+<!--    <div class="col-md">-->
+<!--        <div class="card card-body">-->
+<!--            <form method="post">-->
+<!--                {{form.quantity_of_money_to_convert}}-->
+<!--                {{form.convert_from}}-->
+<!--                {{form.convert_to}}-->
+<!--                <button type="submit">Calculate</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 {% block content %}
 {% endblock content %}

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,33 +8,54 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
 </head>
+
+
 <body>
 
-<form action="" method="post">
+{% load static %}
+<!--<div style="background-image: url({% static 'img/00318.jpg' %}) ;height: 1000px;">-->
+<!--<img src="{% static 'img/00318.jpg' %}" alt="My image">-->
+
+
+<form action="" method="post" style="text-align:center; padding: 500px 0 500px;">
     {% csrf_token %}
-    <label for="Amount of money to convert">Amount of money to convert: </label>
-    <input type="number" id="Amount of money to convert" {%if quantity_of_money_to_convert %} value="{{quantity_of_money_to_convert}}"{% endif %}>
+    <div>
+        <div class="input-group mb-3">
+            {{form.quantity_of_money_to_convert.label_tag}}
+<!--            {{form.quantity_of_money_to_convert}}-->
+            <input type="number" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="quantity_of_money_to_convert" value="{{quantity_of_money_to_convert}}">
+        </div>
+        <div class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">{{form.convert_from.label_tag}}
+    {{form.convert_from}}</div>
+    <div class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">{{form.convert_to.label_tag}}
+        {{form.convert_to}}</div>
 
-    <label for="Currencie to convert from">Currencie to convert from: </label>
-    <select id="Currencie to convert from" type="text" name="Currencie to convert from" value="{{convert_from}}">
-        {% for row in csvreader %}
-        <option value="{{row}}" {% if convert_from == row %}selected{% endif %}>{{row}}</option>
-        {% endfor %}
-    </select>
+    </div>
+<!--    <label for="amount_of_money">Amount of money to convert: </label>-->
+<!--    <input type="number" id="amount_of_money" name="amount-of-money" value="{{amount_of_money}}">-->
 
-    <label for="Currencie to convert to">Currencie to convert to: </label>
-    <select id="Currencie to convert to" type="text" name="Currencie to convert to" value="{{convert_to}}">
-        {% for row in csvreader %}
-        <option value="{{row}}" {% if convert_to == row %}selected{% endif %}>{{row}}</option>
-        {% endfor %}
-    </select>
+<!--    <label for="convert_from">Currencie to convert from:</label>-->
+<!--    <select id="convert_from" name="convert-from" value="{{convert_from}}" >-->
+<!--        {% for row in csvreader %}-->
+<!--            <option value="{{row}}" {% if convert_from == row %}selected{% endif %}>{{row}}</option>-->
+<!--        {% endfor %}-->
+<!--    </select>-->
 
-    <input type="submit" value="OK">
-    {% if converted_sum %}
-    Result is {{converted_sum}}
-    {% endif %}
+<!--    <label for="convert_to">Currencie to convert to: </label>-->
+<!--    <select id="convert_to" name="convert-to" value="{{convert_to}}">-->
+<!--        {% for row in csvreader %}-->
+<!--                <option value="{{row}}" {% if convert_to == row %}selected{% endif %}>{{row}}</option>-->
+<!--        {% endfor %}-->
+<!--    </select>-->
+
+    <input class="btn btn-secondary" type="submit" value="Calculate">
 </form>
-
+    <div style="text-align:center;">
+        {% if converted_sum %}
+            Result is {{converted_sum}}
+        {% endif %}
+    </div>
+<!--</div>-->
 <!--<div class="row">-->
 <!--    <div class="col-md">-->
 <!--        <div class="card card-body">-->
@@ -48,6 +70,7 @@
 <!--</div>-->
 
 {% block content %}
+
 {% endblock content %}
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>

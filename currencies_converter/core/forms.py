@@ -1,14 +1,23 @@
+import json
+import os
+
 from django import forms
+import requests
+import ast
+import json
+import os
 
-currencies = {
-'AUD':48,
-'AZN':41,
-'AMD':18,
-'BYN':26,
-'BGN':38,
-'BRL':13,}
+apikey = os.environ.get('API_KEY_FOR_CURRENCY')
+def get_currencies():
+    currencies = requests.get(f'https://api.apilayer.com/currency_data/live?apikey={apikey}')
+    data = currencies.text
+    proper_dict = json.loads(data)
+    cur = proper_dict['quotes']
+    return cur
 
-c = [(k,k) for k,v in currencies.items()]
+print(get_currencies())
+
+c = [(k[3:],k[3:]) for k,v in get_currencies().items()]
 
 class QuantyToConvert(forms.Form):
     quantity_of_money_to_convert = forms.IntegerField(min_value=1,)

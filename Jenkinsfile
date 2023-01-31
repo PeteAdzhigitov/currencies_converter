@@ -9,7 +9,7 @@ pipeline {
             steps{
 
                 echo 'testing the application converter'
-                pytest 'tests.py'
+                sh 'pytest tests.py'
                 echo 'testing is completed see result'
             }
         }

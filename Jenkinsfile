@@ -1,10 +1,14 @@
 pipeline {
+
     agent any
 
     stages{
-        stage("test")
+
+        stage("test"){
+
         steps{
-            echo "testing the application converter"
+            echo 'testing the application converter'
+            }
         }
     }
 }

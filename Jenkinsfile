@@ -4,21 +4,13 @@ pipeline {
 
     stages{
 
-        stage("test PythonEnv") {
-
-            withPythonEnv('python3') {
-                sh 'pip install pytest'
-                sh 'pytest mytest.py'
-                }
-            }
-
         stage("test"){
 
-        steps{
+            steps{
 
-            echo 'testing the application converter'
-
-            echo 'testing is completed see result'
+                echo 'testing the application converter'
+                bat 'pytest tests.py'
+                echo 'testing is completed see result'
             }
         }
     }

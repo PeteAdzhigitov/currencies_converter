@@ -1,2 +1,2 @@
-print(Hello motherfucker)
+print("Hello motherfucker")
 print('Something else')

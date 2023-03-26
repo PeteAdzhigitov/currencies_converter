@@ -4,10 +4,10 @@ import requests
 from django.shortcuts import render
 from .forms import QuantyToConvert
 from .forms import get_currencies
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-
-
+@login_required()
 def currencies_logic(request):
 #     currencies = {
 #         'AUD':48,
